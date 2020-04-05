@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, url_for, redirect, session
+from flask import Flask, jsonify, request, url_for, redirect, session, render_template
 from random import randint
 
 app = Flask(__name__)
@@ -12,13 +12,16 @@ app.config['SECRET_KEY'] = 'thisisasecret' # we need the secret key to use a ses
 
 @app.route('/')
 def index():
-    return '<h1>Hello </h1>'
+    #return '<h1>Hello </h1>'
+    return render_template('home.html')
 
 @app.route('/home', methods = ['GET', 'POST'], defaults ={ 'name' : "Guest"})
 @app.route('/home/<name>', methods = ['GET', 'POST'])
 def home(name):
     session['name'] = name
-    return '<h1>Hello {}</h1>'.format(name)
+    return render_template('home.html', name=name, display=False, mylist=['one', 'two', 'three'],
+    listofdict=[{"key": 22}, {"key":55}])
+    # return '<h1{}>Hello {}</h1>'.format(name)
 
 @app.route('/sum/<int:a>/<int:b>')
 def sum(a,b):
@@ -39,11 +42,12 @@ def query():
 
 @app.route('/theform')
 def theform():
-    return '''<form method = "POST" action="/process">
-            <input type="text" name = "name">
-            <input type="text" name = "location">
-            <input type="submit">
-            </form>'''
+    # return '''<form method = "POST" action="/process">
+    #         <input type="text" name = "name">
+    #         <input type="text" name = "location">
+    #         <input type="submit">
+    #         </form>'''
+    return render_template('form.html')
 
 @app.route('/process', methods=["POST"])
 def process():

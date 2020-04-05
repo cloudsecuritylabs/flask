@@ -1,0 +1,19 @@
+<h1>Welcome Home, {{ name }}</h1>
+
+{% if display %}
+<h2>Display this</h2>
+
+{% else %}
+this is not displayed
+{% endif %}
+
+{% for x in mylist %}
+<li>{{ x }}</li>
+{% endfor %}
+
+{% for x in listofdict %}
+<li>{{ x.key }}</li>
+{% endfor %}
+
+<img src={{ url_for('static', filename= 'images/pic.png')}}>
+test
