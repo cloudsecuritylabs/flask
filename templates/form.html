@@ -1,6 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Form page {% endblock %}
+{% block content %}
+{{ super() }}
 <h1>Please fill out the form</h1>
 <form method = "POST" action="/process">
     <input type="text" name = "name">
     <input type="text" name = "location">
     <input type="submit">
 </form>
+{% endblock %}  
